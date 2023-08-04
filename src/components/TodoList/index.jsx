@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 
-import { addNewTask, getTodoList } from '../../api/todoListApi'
+import { addNewTask, deleteTask, getTodoList } from '../../api/todoListApi'
 import './index.css'
 
 /**
@@ -15,8 +15,20 @@ export default function TodoList() {
     error,
   } = useQuery({ queryKey: ['todos'], queryFn: getTodoList })
 
-  function handleDelete(task) {
-    console.log(task)
+  const queryClient = useQueryClient()
+  const { mutate: mutateDeleteTodo } = useMutation({
+    mutationFn: deleteTask,
+    onSuccess: () => {
+      // refetch the list
+      queryClient.invalidateQueries({ queryKey: ['todos'] })
+    },
+  })
+
+  /**
+   * @param {number} id ID of the task to be deleted
+   */
+  function handleDelete(id) {
+    mutateDeleteTodo(id)
   }
 
   if (isLoading) {
@@ -33,18 +45,14 @@ export default function TodoList() {
 
       <AddTodoForm />
 
-      {todoList.map((task) => {
-        const { id, title } = task
-
-        return (
-          <li key={id}>
-            {title}{' '}
-            <button type="button" onClick={() => handleDelete(task)}>
-              Delete
-            </button>
-          </li>
-        )
-      })}
+      {todoList.map(({ id, title }) => (
+        <li key={id}>
+          {title}{' '}
+          <button type="button" onClick={() => handleDelete(id)}>
+            Delete
+          </button>
+        </li>
+      ))}
     </div>
   )
 }

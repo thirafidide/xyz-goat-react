@@ -20,7 +20,7 @@ export async function getTodoList() {
  *
  * @param {string} taskTitle Title for the task to be added to the list
  *
- * @returns {number} id of new task
+ * @returns {Promise<number>} id of new task
  */
 export async function addNewTask(taskTitle) {
   const response = await fetch('http://localhost:3001/tasks', {
@@ -33,4 +33,15 @@ export async function addNewTask(taskTitle) {
 
   const { id } = await response.json()
   return id
+}
+
+/**
+ * Delete a task from the database
+ *
+ * @param {number} id ID of the task to be deleted from the list
+ */
+export async function deleteTask(id) {
+  await fetch(`http://localhost:3001/tasks/${id}`, {
+    method: 'DELETE',
+  })
 }
