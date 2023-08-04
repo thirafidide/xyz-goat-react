@@ -1,4 +1,5 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
+import { useQuery } from '@tanstack/react-query'
 
 import { getTodoList } from '../../api/todoListApi'
 import './index.css'
@@ -7,14 +8,23 @@ import './index.css'
  * TODO List
  */
 export default function TodoList() {
-  const [todos, setTodos] = useState([])
-
-  useEffect(() => {
-    getTodoList().then((todoList) => setTodos(todoList))
-  }, [])
+  const {
+    isLoading,
+    isError,
+    data: todoList,
+    error,
+  } = useQuery({ queryKey: ['todos'], queryFn: getTodoList })
 
   function handleDelete(task) {
     console.log(task)
+  }
+
+  if (isLoading) {
+    return <span>Loading...</span>
+  }
+
+  if (isError) {
+    return <span>Error: {error.message}</span>
   }
 
   return (
@@ -23,7 +33,7 @@ export default function TodoList() {
 
       <AddTodoForm />
 
-      {todos.map((task) => {
+      {todoList.map((task) => {
         const { id, title } = task
 
         return (
