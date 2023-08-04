@@ -13,15 +13,28 @@ export default function TodoList() {
     getTodoList().then((todoList) => setTodos(todoList))
   }, [])
 
+  function handleDelete(task) {
+    console.log(task)
+  }
+
   return (
     <div className="todolist">
       <h1>TODO LIST</h1>
 
       <AddTodoForm />
 
-      {todos.map(({ id, title }) => (
-        <li key={id}>{title}</li>
-      ))}
+      {todos.map((task) => {
+        const { id, title } = task
+
+        return (
+          <li key={id}>
+            {title}{' '}
+            <button type="button" onClick={() => handleDelete(task)}>
+              Delete
+            </button>
+          </li>
+        )
+      })}
     </div>
   )
 }
