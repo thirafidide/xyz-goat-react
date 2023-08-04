@@ -14,3 +14,23 @@ export async function getTodoList() {
 
   return response.json()
 }
+
+/**
+ * Add new task to the database
+ *
+ * @param {string} taskTitle Title for the task to be added to the list
+ *
+ * @returns {number} id of new task
+ */
+export async function addNewTask(taskTitle) {
+  const response = await fetch('http://localhost:3001/tasks', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ title: taskTitle }),
+  })
+
+  const { id } = await response.json()
+  return id
+}
