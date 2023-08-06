@@ -1,21 +1,14 @@
 import { useState } from 'react'
-import { useMutation, useQueryClient } from '@tanstack/react-query'
 
-import { addNewTask } from '../../api/todoListApi'
 import styles from './index.module.css'
 import Button from '../Button'
+import useAddTodo from '../../hooks/useAddTodo'
 
 export default function AddTodoForm() {
   const [newTodo, setNewTodo] = useState('')
-
-  const queryClient = useQueryClient()
-  const { mutate: mutateAddTodo } = useMutation({
-    mutationFn: addNewTask,
+  const addTodo = useAddTodo({
     onSuccess: () => {
-      // refetch the list to show the new task
-      queryClient.invalidateQueries({ queryKey: ['todos'] })
-
-      // clear the form
+      // Clear the input field so user can easil add more items
       setNewTodo('')
     },
   })
@@ -32,7 +25,7 @@ export default function AddTodoForm() {
    */
   function handleSubmit(event) {
     event.preventDefault()
-    mutateAddTodo(newTodo)
+    addTodo(newTodo)
   }
 
   return (
