@@ -1,4 +1,6 @@
 .button {
+  --button-text-color: #fdfdff;
+  --button-text-color-hover: #fdfdff;
   --button-bg-color: #9893da;
   --button-bg-color-hover: #6e67cb;
 
@@ -6,16 +8,19 @@
   padding: 0.65em 1.2em;
   background-color: var(--button-bg-color);
   font-weight: bold;
-  color: #fdfdff;
+  color: var(--button-text-color);
   cursor: pointer;
   min-width: 6em;
 }
 
 .button:hover {
   background-color: var(--button-bg-color-hover);
+  color: var(--button-text-color-hover);
 }
 
 .button--variant-delete {
-  --button-bg-color: #ed6a5a;
+  --button-text-color: #ed6a5a;
+  --button-text-color-hover: #fdfdff;
+  --button-bg-color: transparent;
   --button-bg-color-hover: #d33f49;
 }
