@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 
 import { addNewTask } from '../../api/todoListApi'
+import styles from './index.module.css'
 
 export default function AddTodoForm() {
   const [newTodo, setNewTodo] = useState('')
@@ -34,16 +35,27 @@ export default function AddTodoForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label htmlFor="add-todo">New Tasks</label>
-      <input
-        type="text"
-        name="add-todo"
-        value={newTodo}
-        onChange={handleChangeInput}
-      />
+    <form onSubmit={handleSubmit} className={styles.addtodoform}>
+      <label className={styles.addtodoform__inputlabel} htmlFor="add-todo">
+        New Task
+      </label>
 
-      <button type="submit">Add</button>
+      <div className={styles.addtodoform__inputfield}>
+        <input
+          type="text"
+          id="add-todo"
+          value={newTodo}
+          onChange={handleChangeInput}
+          className={styles['addtodoform__inputfield-input']}
+        />
+
+        <button
+          type="submit"
+          className={styles['addtodoform__inputfield-button']}
+        >
+          Add
+        </button>
+      </div>
     </form>
   )
 }
