@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 
 import { deleteTask } from '../../api/todoListApi'
 import styles from './index.module.css'
+import Button, { BUTTON_VARIANT_DELETE } from '../Button'
 
 export default function Task(props) {
   const { id, title } = props
@@ -26,13 +27,13 @@ export default function Task(props) {
   return (
     <li className={styles.task}>
       {title}{' '}
-      <button
+      <Button
         type="button"
         onClick={() => handleDelete(id)}
-        className={styles['task__delete-button']}
+        variant={BUTTON_VARIANT_DELETE}
       >
         Delete
-      </button>
+      </Button>
     </li>
   )
 }

@@ -20,16 +20,3 @@
   border: 1px solid #969696;
   border-radius: 0;
 }
-
-.addtodoform__inputfield-button {
-  border: none;
-  padding: 0.65em 1.2em;
-  background-color: #9893da;
-  font-weight: 600;
-  color: #fdfdff;
-  cursor: pointer;
-}
-
-.addtodoform__inputfield-button:hover {
-  background-color: #6e67cb;
-}

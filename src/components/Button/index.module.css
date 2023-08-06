@@ -1,0 +1,21 @@
+.button {
+  --button-bg-color: #9893da;
+  --button-bg-color-hover: #6e67cb;
+
+  border: none;
+  padding: 0.65em 1.2em;
+  background-color: var(--button-bg-color);
+  font-weight: bold;
+  color: #fdfdff;
+  cursor: pointer;
+  min-width: 6em;
+}
+
+.button:hover {
+  background-color: var(--button-bg-color-hover);
+}
+
+.button--variant-delete {
+  --button-bg-color: #ed6a5a;
+  --button-bg-color-hover: #d33f49;
+}
