@@ -1,20 +1,13 @@
-import { useQuery } from '@tanstack/react-query'
-
-import { getTodoList } from '../../api/todoListApi'
 import AddTodoForm from '../AddTodoForm'
 import Task from '../Task'
+import useTodoList from '../../hooks/useTodoList'
 import styles from './index.module.css'
 
 /**
  * TODO List
  */
 export default function TodoList() {
-  const {
-    isLoading,
-    isError,
-    data: todoList,
-    error,
-  } = useQuery({ queryKey: ['todos'], queryFn: getTodoList })
+  const { isLoading, isError, todoList, error } = useTodoList()
 
   if (isLoading) {
     return <span>Loading...</span>
@@ -33,7 +26,7 @@ export default function TodoList() {
       <hr className={styles.todolist__divider} />
 
       <ul className={styles.todolist__content}>
-        {todoList.map(({ id, title }) => (
+        {todoList?.map(({ id, title }) => (
           <Task key={id} id={id} title={title} />
         ))}
       </ul>
