@@ -11,6 +11,10 @@
   color: var(--button-text-color);
   cursor: pointer;
   min-width: 6em;
+
+  transition-property: background-color, color;
+  transition-duration: 0.25s;
+  will-change: background-color, color;
 }
 
 .button:hover {
