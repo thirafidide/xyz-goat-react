@@ -28,3 +28,8 @@
   --button-bg-color: transparent;
   --button-bg-color-hover: #d33f49;
 }
+
+.button--disabled-true {
+  opacity: 0.45;
+  cursor: progress;
+}

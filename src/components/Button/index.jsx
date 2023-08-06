@@ -14,13 +14,14 @@ export const BUTTON_VARIANT_DELETE = 'delete'
  * @returns {JSX.Element} JSX Element of `<button />`
  */
 export default function Button(props) {
-  const { className, variant = BUTTON_VARIANT_PRIMARY } = props
+  const { className, disabled, variant = BUTTON_VARIANT_PRIMARY } = props
 
   return (
     <button
       {...props}
       className={cx(className, styles.button, {
         [styles['button--variant-delete']]: variant === BUTTON_VARIANT_DELETE,
+        [styles['button--disabled-true']]: disabled,
       })}
     />
   )
@@ -28,5 +29,6 @@ export default function Button(props) {
 
 Button.propTypes = {
   className: PropTypes.string,
+  disabled: PropTypes.bool,
   variant: PropTypes.oneOf([BUTTON_VARIANT_PRIMARY, BUTTON_VARIANT_DELETE]),
 }
