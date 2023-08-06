@@ -1,9 +1,23 @@
 .todolist {
+  display: flex;
+  flex-direction: column;
+  gap: 1.75em;
+}
+
+.todolist__header {
+  margin: 0;
+}
+
+.todolist__divider {
+  padding: 0;
+  margin: 0;
+  border: none;
+  border-top: 1px solid #969696;
 }
 
 .todolist__content {
   display: flex;
   flex-direction: column;
   gap: 1em;
-  padding: 1.2em 0;
+  padding: 0;
 }

@@ -26,9 +26,11 @@ export default function TodoList() {
 
   return (
     <div className={styles.todolist}>
-      <h1>TODO LIST</h1>
+      <h1 className={styles.todolist__header}>TODO LIST</h1>
 
       <AddTodoForm />
+
+      <hr className={styles.todolist__divider} />
 
       <ul className={styles.todolist__content}>
         {todoList.map(({ id, title }) => (
