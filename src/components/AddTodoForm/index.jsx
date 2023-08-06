@@ -6,7 +6,7 @@ import useAddTodo from '../../hooks/useAddTodo'
 
 export default function AddTodoForm() {
   const [newTodo, setNewTodo] = useState('')
-  const addTodo = useAddTodo({
+  const { addTodo, status, error } = useAddTodo({
     onSuccess: () => {
       // Clear the input field so user can easil add more items
       setNewTodo('')
@@ -41,10 +41,17 @@ export default function AddTodoForm() {
           value={newTodo}
           onChange={handleChangeInput}
           className={styles['addtodoform__inputfield-input']}
+          disabled={status === 'loading'}
         />
 
-        <Button type="submit">Add</Button>
+        <Button type="submit" disabled={status === 'loading'}>
+          {status === 'loading' ? 'Adding...' : 'Add'}
+        </Button>
       </div>
+
+      {status === 'error' && (
+        <div className={styles.addtodoform__errormsg}>{error?.message}</div>
+      )}
     </form>
   )
 }
