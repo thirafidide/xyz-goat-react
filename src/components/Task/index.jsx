@@ -1,27 +1,15 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query'
 import PropTypes from 'prop-types'
 
-import { deleteTask } from '../../api/todoListApi'
 import styles from './index.module.css'
 import Button, { BUTTON_VARIANT_DELETE } from '../Button'
+import useDeleteTodo from '../../hooks/useDeleteTodo'
 
 export default function Task(props) {
   const { id, title } = props
+  const deleteTodo = useDeleteTodo(id)
 
-  const queryClient = useQueryClient()
-  const { mutate: mutateDeleteTodo } = useMutation({
-    mutationFn: deleteTask,
-    onSuccess: () => {
-      // refetch the list
-      queryClient.invalidateQueries({ queryKey: ['todos'] })
-    },
-  })
-
-  /**
-   * @param {number} id ID of the task to be deleted
-   */
-  function handleDelete(id) {
-    mutateDeleteTodo(id)
+  function handleDelete() {
+    deleteTodo()
   }
 
   return (
@@ -29,7 +17,7 @@ export default function Task(props) {
       {title}{' '}
       <Button
         type="button"
-        onClick={() => handleDelete(id)}
+        onClick={handleDelete}
         variant={BUTTON_VARIANT_DELETE}
       >
         Delete
