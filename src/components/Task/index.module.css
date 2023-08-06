@@ -1,5 +1,17 @@
 .task {
   display: flex;
+  flex-direction: column;
+  gap: 0.2em;
+}
+
+.task__content {
+  display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+.task__errormsg {
+  color: #d33f49;
+  text-align: left;
+  font-size: 0.8em;
 }

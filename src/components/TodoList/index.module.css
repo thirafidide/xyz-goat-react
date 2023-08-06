@@ -18,6 +18,6 @@
 .todolist__content {
   display: flex;
   flex-direction: column;
-  gap: 1em;
+  gap: 1.3em;
   padding: 0;
 }
