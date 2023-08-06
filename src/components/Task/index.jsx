@@ -2,6 +2,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query'
 import PropTypes from 'prop-types'
 
 import { deleteTask } from '../../api/todoListApi'
+import styles from './index.module.css'
 
 export default function Task(props) {
   const { id, title } = props
@@ -23,9 +24,13 @@ export default function Task(props) {
   }
 
   return (
-    <li>
+    <li className={styles.task}>
       {title}{' '}
-      <button type="button" onClick={() => handleDelete(id)}>
+      <button
+        type="button"
+        onClick={() => handleDelete(id)}
+        className={styles['task__delete-button']}
+      >
         Delete
       </button>
     </li>

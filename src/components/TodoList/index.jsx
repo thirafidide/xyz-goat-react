@@ -2,8 +2,8 @@ import { useQuery } from '@tanstack/react-query'
 
 import { getTodoList } from '../../api/todoListApi'
 import AddTodoForm from '../AddTodoForm'
-import './index.css'
 import Task from '../Task'
+import styles from './index.module.css'
 
 /**
  * TODO List
@@ -25,14 +25,16 @@ export default function TodoList() {
   }
 
   return (
-    <div className="todolist">
+    <div className={styles.todolist}>
       <h1>TODO LIST</h1>
 
       <AddTodoForm />
 
-      {todoList.map(({ id, title }) => (
-        <Task key={id} id={id} title={title} />
-      ))}
+      <ul className={styles.todolist__content}>
+        {todoList.map(({ id, title }) => (
+          <Task key={id} id={id} title={title} />
+        ))}
+      </ul>
     </div>
   )
 }
