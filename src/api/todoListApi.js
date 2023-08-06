@@ -39,6 +39,8 @@ export async function addNewTask(taskTitle) {
  * Delete a task from the database
  *
  * @param {number} id ID of the task to be deleted from the list
+ *
+ * @returns {Promise<void>}
  */
 export async function deleteTask(id) {
   await fetch(`http://localhost:3001/tasks/${id}`, {
