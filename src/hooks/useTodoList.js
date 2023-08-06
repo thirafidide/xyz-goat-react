@@ -6,10 +6,10 @@ export const TODO_LIST_QUERY_KEY = ['todo-list']
 /**
  * @typedef {Object} UseTodoListReturn
  *
- * @property {boolean} isLoading
- * @property {boolean} isError
- * @property {Error?} error
- * @property {import('../api/todoListApi').Task[]?} todoList
+ * @property {boolean} isLoading true when the api calls currently loading
+ * @property {boolean} isError true when the api calls returned with error
+ * @property {Error?} error Error of the last api call. Only have value when isError is true
+ * @property {import('../api/todoListApi').Task[]?} todoList Todo list from the server
  */
 
 /**

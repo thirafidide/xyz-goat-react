@@ -9,27 +9,39 @@ import styles from './index.module.css'
 export default function TodoList() {
   const { isLoading, isError, todoList, error } = useTodoList()
 
-  if (isLoading) {
-    return <span>Loading...</span>
-  }
-
-  if (isError) {
-    return <span>Error: {error.message}</span>
-  }
+  const hasList = todoList !== null && todoList !== undefined
+  const isEmptyList = hasList && todoList.length <= 0
 
   return (
     <div className={styles.todolist}>
       <h1 className={styles.todolist__header}>TODO LIST</h1>
 
-      <AddTodoForm />
+      {hasList && (
+        <>
+          <AddTodoForm />
+          <hr className={styles.todolist__divider} />
+        </>
+      )}
 
-      <hr className={styles.todolist__divider} />
+      {isLoading && <span>Loading...</span>}
+      {isError && (
+        <span>
+          Failed to refresh the list:{' '}
+          {error?.message || 'Failed to connect to the server'}
+        </span>
+      )}
 
-      <ul className={styles.todolist__content}>
-        {todoList?.map(({ id, title }) => (
-          <Task key={id} id={id} title={title} />
-        ))}
-      </ul>
+      {isEmptyList && (
+        <div className={styles.todolist__content}>No todo item left! 🎉</div>
+      )}
+
+      {!isEmptyList && (
+        <ul className={styles.todolist__content}>
+          {todoList?.map(({ id, title }) => (
+            <Task key={id} id={id} title={title} />
+          ))}
+        </ul>
+      )}
     </div>
   )
 }
