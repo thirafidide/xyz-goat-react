@@ -29,3 +29,7 @@
   color: #fdfdff;
   cursor: pointer;
 }
+
+.addtodoform__inputfield-button:hover {
+  background-color: #6e67cb;
+}
