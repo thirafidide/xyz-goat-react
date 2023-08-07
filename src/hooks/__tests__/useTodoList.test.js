@@ -1,25 +1,9 @@
 import { renderHook } from '@testing-library/react-hooks/dom'
-import useTodoList from '../useTodoList'
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import { MOCK_INITIAL_TODO_LIST, server } from '../../mocks/server'
 import { rest } from 'msw'
 
-function createTestWrapperComponent() {
-  const queryClient = new QueryClient({
-    defaultOptions: {
-      queries: {
-        // Disable react query retry behaviour so we can test fail case faster
-        retry: false,
-      },
-    },
-  })
-
-  const wrapper = ({ children }) => (
-    <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
-  )
-
-  return wrapper
-}
+import useTodoList from '../useTodoList'
+import { MOCK_INITIAL_TODO_LIST, server } from '../../mocks/server'
+import { createTestWrapperComponent } from '../../mocks/wrapper'
 
 test('should start loading todo list on mounted', async () => {
   const wrapper = createTestWrapperComponent()

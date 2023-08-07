@@ -28,7 +28,8 @@ const handlers = [
   }),
 
   rest.post('http://localhost:3001/tasks', async (req, res, ctx) => {
-    const title = await req.json()?.title
+    const body = await req.json()
+    const title = body?.title
     const tasks = getTasksFromSession() ?? []
 
     let biggestId = 0

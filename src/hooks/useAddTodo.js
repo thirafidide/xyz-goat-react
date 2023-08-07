@@ -20,7 +20,7 @@ import { useState } from 'react'
  *
  * @returns {UseAddTodoReturn} Function to add new todo item to the list on the server
  */
-export default function useAddTodo({ onSuccess, onError }) {
+export default function useAddTodo({ onSuccess, onError } = {}) {
   const [error, setError] = useState(null)
 
   const queryClient = useQueryClient()
@@ -33,7 +33,7 @@ export default function useAddTodo({ onSuccess, onError }) {
     onSuccess: () => {
       // refetch the list to show the new task
       queryClient.invalidateQueries({ queryKey: TODO_LIST_QUERY_KEY })
-      onSuccess()
+      onSuccess?.()
     },
     onError,
   })
