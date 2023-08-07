@@ -44,13 +44,22 @@ export default function AddTodoForm() {
           disabled={status === 'loading'}
         />
 
-        <Button type="submit" disabled={status === 'loading'}>
+        <Button
+          type="submit"
+          disabled={status === 'loading'}
+          data-testid="addtodoform-submit-btn"
+        >
           {status === 'loading' ? 'Adding...' : 'Add'}
         </Button>
       </div>
 
       {status === 'error' && (
-        <div className={styles.addtodoform__errormsg}>{error?.message}</div>
+        <div
+          className={styles.addtodoform__errormsg}
+          data-testid="addtodoform-error-msg"
+        >
+          {error?.message}
+        </div>
       )}
     </form>
   )

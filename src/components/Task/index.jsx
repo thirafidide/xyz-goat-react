@@ -13,7 +13,7 @@ export default function Task(props) {
   }
 
   return (
-    <li className={styles.task}>
+    <li className={styles.task} data-testid="todo-list-item">
       <div className={styles.task__content}>
         {title}
 
@@ -22,6 +22,7 @@ export default function Task(props) {
           onClick={handleDelete}
           variant={BUTTON_VARIANT_DELETE}
           disabled={status === 'loading'}
+          data-testid="todo-list-item-delete-btn"
         >
           {status === 'loading' ? 'Deleting...' : 'Delete'}
         </Button>
