@@ -1,29 +1,34 @@
-import { act, renderHook } from '@testing-library/react-hooks/dom'
+import { renderHook } from '@testing-library/react-hooks/dom'
 import { rest } from 'msw'
 
-import useAddTodo from '../useAddTodo'
+import useDeleteTodo from '../useDeleteTodo'
 import { getTodoList } from '../../api/todoListApi'
 import { server } from '../../mocks/server'
 import { createTestWrapperComponent } from '../../mocks/wrapper'
 
-test('should provide addTodo function', async () => {
+test('should provide deleteTodo function', async () => {
   const wrapper = createTestWrapperComponent()
-  const { result } = renderHook(() => useAddTodo(), {
+  const { result } = renderHook(() => useDeleteTodo(1), {
     wrapper,
   })
 
   expect(result.current.status).toBe('idle')
-  expect(result.current.addTodo).toBeInstanceOf(Function)
+  expect(result.current.deleteTodo).toBeInstanceOf(Function)
 })
 
-test('should save todo to the server when called', async () => {
-  const wrapper = createTestWrapperComponent()
-  const { result, waitForNextUpdate } = renderHook(() => useAddTodo(), {
-    wrapper,
-  })
+test('should delete todo from the server when called', async () => {
+  // populate todo list
+  await getTodoList()
 
-  const newTodoTitle = 'New Todo'
-  result.current.addTodo(newTodoTitle)
+  const idToDelete = 1
+  const wrapper = createTestWrapperComponent()
+  const { result, waitForNextUpdate } = renderHook(
+    () => useDeleteTodo(idToDelete),
+    {
+      wrapper,
+    },
+  )
+  result.current.deleteTodo()
 
   await waitForNextUpdate()
   if (result.current.status === 'loading') {
@@ -33,21 +38,23 @@ test('should save todo to the server when called', async () => {
   expect(result.current.status).toBe('success')
 
   const list = await getTodoList()
-  expect(list).toMatchObject([{ id: 1, title: newTodoTitle }])
+  for (const task of list) {
+    expect(task.id).not.toBe(idToDelete)
+  }
 })
 
 test('should trigger callback on success', async () => {
+  const idToDelete = 2
   const onSuccess = jest.fn()
   const wrapper = createTestWrapperComponent()
   const { result, waitForNextUpdate } = renderHook(
-    () => useAddTodo({ onSuccess }),
+    () => useDeleteTodo(idToDelete, { onSuccess }),
     {
       wrapper,
     },
   )
 
-  const newTodoTitle = 'New Todo 2'
-  result.current.addTodo(newTodoTitle)
+  result.current.deleteTodo()
 
   await waitForNextUpdate()
   if (result.current.status === 'loading') {
@@ -61,7 +68,7 @@ test('should trigger callback on success', async () => {
 test('should return error when failed to fetch', async () => {
   // Mock network error like offline/connection failed
   server.use(
-    rest.post('http://localhost:3001/tasks', (req, res) => {
+    rest.delete('http://localhost:3001/tasks/:id', (req, res) => {
       return res.networkError('Network error')
     }),
   )
@@ -74,14 +81,13 @@ test('should return error when failed to fetch', async () => {
   const onError = jest.fn()
   const wrapper = createTestWrapperComponent()
   const { result, waitForNextUpdate } = renderHook(
-    () => useAddTodo({ onError }),
+    () => useDeleteTodo(3, { onError }),
     {
       wrapper,
     },
   )
 
-  const newTodoTitle = 'Network Error'
-  result.current.addTodo(newTodoTitle)
+  result.current.deleteTodo()
 
   await waitForNextUpdate()
   if (result.current.status === 'loading') {
@@ -94,17 +100,4 @@ test('should return error when failed to fetch', async () => {
 
   const listAfter = await getTodoList()
   expect(listAfter).toMatchObject(listBefore)
-})
-
-test('should reject empty todo', async () => {
-  const wrapper = createTestWrapperComponent()
-  const { result } = renderHook(() => useAddTodo(), {
-    wrapper,
-  })
-
-  const newTodoTitle = ''
-  act(() => result.current.addTodo(newTodoTitle))
-
-  expect(result.current.status).toBe('error')
-  expect(result.current.error?.message).toBe('Task title cannot be empty')
 })

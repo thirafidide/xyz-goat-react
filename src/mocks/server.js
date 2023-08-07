@@ -45,7 +45,7 @@ const handlers = [
   }),
 
   rest.delete('http://localhost:3001/tasks/:id', async (req, res, ctx) => {
-    const idToDelete = req.params.id
+    const idToDelete = Number(req.params.id)
 
     const tasks = getTasksFromSession() ?? []
     const newTasks = tasks.filter(({ id }) => id !== idToDelete)
