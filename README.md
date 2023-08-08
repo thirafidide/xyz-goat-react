@@ -1,37 +1,19 @@
-# XYZ GOAT React.js Code Challenge
+# XYZ GOAT React.js Code Challenge Solution
 
-**TODO List React** is a code challenge for frontend developer.
+This Todo List app is my solution for [XYZ GOAT React.js Code Challenge](https://github.com/the-goat-jp/react-challenge)
 
-![TODO List App](https://user-images.githubusercontent.com/2387508/141241010-f29cb52e-adcf-4ac3-a220-ad59f7661d54.png)
+## Requirement
 
-## Mission
+I'm not sure if upgrading the CRA package is allowed for the challange and the version that the challange use has some bugs that prevent it to be running on Node version `> 16`. So to run this website, you need to use node version 16
 
-**Here are the tasks you must complete:**
+```bash
+# using NVM
+nvm install 16
+nvm use 16
 
-- Complete the TODO List application in accordance with the design (image above)
-  - Fetch tasks
-  - Add a new task
-  - Delete a task
-- **MUST** use [JSON Server](https://github.com/typicode/json-server) (db.json) as API server when fetching tasks, adding a new task and deleting a task
-- Implement custom hooks in order to manage tasks
-- Add more than **3 unit tests** (custom hooks and components) with [jest](https://jestjs.io/docs/getting-started)
-- Refactor the code to be more readable
-- Add source code comments to be more readable
-
-## Rules
-
-**NOT ALLOWED**
-
-- Remove existing source code
-- Change the API server and `db.json`
-- Use another languages like TypeScript (**MUST** use JavaScript)
-
-**ALLOWED**
-
-- Change the design to have better UI and UX
-- Modify existing source code
-- Create new modules/methods/components/hooks
-- Add **new packages**
+node -v
+# v16.20.1
+```
 
 ## Commands
 
@@ -63,17 +45,3 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 ### `yarn server`
 
 Run the API server with JSON Server.
-
-## Hiring Criteria
-We will evaluate your skills based on criteria as below.
-- Complete all functionalities
-- Test coverage should be greater than 70%
-- Mocking network requests
-- Follow component oriented programming
-- Add source code comments to be more readable
-- Good naming convention (filenames, functions and variables)
-- Design testable functions
-- implement custom hooks
-- High maintenance source code
-- Error handling
-
