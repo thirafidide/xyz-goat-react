@@ -4,6 +4,15 @@ import styles from './index.module.css'
 import Button, { BUTTON_VARIANT_DELETE } from '../Button'
 import useDeleteTodo from '../../hooks/useDeleteTodo'
 
+/**
+ * Render individual task/todo item as a list item for TodoList component
+ *
+ * @param {Object} props The component props
+ * @param {number} props.id Id of the task
+ * @param {string} props.title Title of the task
+ *
+ * @returns {JSX.Element} React element
+ */
 export default function Task(props) {
   const { id, title } = props
   const { deleteTodo, status, error } = useDeleteTodo(id)

@@ -9,7 +9,7 @@ export const BUTTON_VARIANT_DELETE = 'delete'
  * Generic button that extends and add styles to HTML `<button />` element
  *
  * @param {Object} props extends HTML `<button />` props
- * @param {string} props.variant Style variant for the button, default to "BUTTON_VARIANT_PRIMARY"
+ * @param {"primary" | "delete"} props.variant Style variant for the button. Use const exported from Button file to use. Default to "BUTTON_VARIANT_PRIMARY"
  *
  * @returns {JSX.Element} JSX Element of `<button />`
  */

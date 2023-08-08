@@ -4,7 +4,11 @@ import useTodoList from '../../hooks/useTodoList'
 import styles from './index.module.css'
 
 /**
- * TODO List
+ * Todo List
+ *
+ * Main component that shows todo list and form to add new one
+ *
+ * @returns {JSX.Element} React element
  */
 export default function TodoList() {
   const { isLoading, isError, todoList, error } = useTodoList()

@@ -4,6 +4,11 @@ import styles from './index.module.css'
 import Button from '../Button'
 import useAddTodo from '../../hooks/useAddTodo'
 
+/**
+ * Form that handle adding new task/todo
+ *
+ * @returns {JSX.Element} React element
+ */
 export default function AddTodoForm() {
   const [newTodo, setNewTodo] = useState('')
   const { addTodo, status, error } = useAddTodo({
