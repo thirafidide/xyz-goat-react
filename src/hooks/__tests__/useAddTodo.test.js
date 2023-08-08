@@ -3,8 +3,8 @@ import { rest } from 'msw'
 
 import useAddTodo from '../useAddTodo'
 import { getTodoList } from '../../api/todoListApi'
-import { server } from '../../mocks/server'
-import { createTestWrapperComponent } from '../../mocks/wrapper'
+import { server } from '../../test/server'
+import { createTestWrapperComponent } from '../../test/wrapper'
 
 test('should provide addTodo function', async () => {
   const wrapper = createTestWrapperComponent()

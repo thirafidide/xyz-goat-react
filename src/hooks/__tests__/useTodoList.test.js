@@ -2,8 +2,8 @@ import { renderHook } from '@testing-library/react-hooks/dom'
 import { rest } from 'msw'
 
 import useTodoList from '../useTodoList'
-import { MOCK_INITIAL_TODO_LIST, server } from '../../mocks/server'
-import { createTestWrapperComponent } from '../../mocks/wrapper'
+import { MOCK_INITIAL_TODO_LIST, server } from '../../test/server'
+import { createTestWrapperComponent } from '../../test/wrapper'
 
 test('should start loading todo list on mounted', async () => {
   const wrapper = createTestWrapperComponent()

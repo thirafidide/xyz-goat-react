@@ -1,4 +1,4 @@
-import { render, screen, waitForElementToBeRemoved } from '../../mocks/utils'
+import { render, screen, waitForElementToBeRemoved } from '../../test/utils'
 import userEvent from '@testing-library/user-event'
 import '@testing-library/jest-dom'
 
