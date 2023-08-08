@@ -1,8 +1,8 @@
 .button {
-  --button-text-color: #fdfdff;
-  --button-text-color-hover: #fdfdff;
-  --button-bg-color: #9893da;
-  --button-bg-color-hover: #6e67cb;
+  --button-text-color: var(--light-primary);
+  --button-text-color-hover: var(--light-primary);
+  --button-bg-color: var(--purple);
+  --button-bg-color-hover: var(--dark-purple);
 
   border: none;
   padding: 0.65em 1.2em;
@@ -23,10 +23,10 @@
 }
 
 .button--variant-delete {
-  --button-text-color: #ed6a5a;
-  --button-text-color-hover: #fdfdff;
+  --button-text-color: var(--orange);
+  --button-text-color-hover: var(--light-primary);
   --button-bg-color: transparent;
-  --button-bg-color-hover: #d33f49;
+  --button-bg-color-hover: var(--red);
 }
 
 .button--disabled-true {
